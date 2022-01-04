@@ -1,6 +1,6 @@
-import { createRouter, createMemoryHistory, Router } from "vue-router";
+import { createRouter, createMemoryHistory, Router, RouteRecordRaw, RouteLocationNormalized, NavigationGuardNext} from "vue-router";
 
-let routes = [
+let routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/home',
@@ -14,6 +14,11 @@ let routes = [
 let router: Router = createRouter({
   routes: routes,
   history: createMemoryHistory()
+})
+
+router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  console.log('beforeEach----')
+  next()
 })
 
 export default router
